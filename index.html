@@ -132,8 +132,6 @@
             </div>
         </div>
 
-        
-
         <!-- KATEGORI FILTER -->
         <div id="categoryFilterContainer" class="flex overflow-x-auto gap-2 mb-6 pb-2 hide-scrollbar snap-x hidden">
             <!-- Diisi dari JS -->
@@ -152,7 +150,7 @@
             </div>
         </div>
 
-      <!-- BANNER TENGAH / PROMO DINAMIS (TAMBAHAN BARU) -->
+        <!-- BANNER TENGAH / PROMO DINAMIS -->
         <div id="midBannerContainer" class="hidden mb-6 rounded-2xl overflow-hidden shadow-sm w-full relative group cursor-pointer hover:shadow-md transition-all">
             <img id="midBannerImg" src="" class="w-full h-auto max-h-48 sm:max-h-64 object-cover transform group-hover:scale-[1.02] transition-transform duration-500">
         </div>   
@@ -167,6 +165,20 @@
         <!-- Product Grid -->
         <div id="productGrid" class="grid grid-cols-2 md:grid-cols-3 gap-4">
             <!-- Isi dari JS -->
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SECTION BLOG / ARTIKEL (THE HOLY TRINITY)  -->
+        <!-- ========================================== -->
+        <div id="blogSection" class="hidden mt-12 border-t border-slate-200 pt-8">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="font-bold text-slate-800 flex items-center gap-2 text-lg">
+                    <i data-lucide="book-open" class="w-5 h-5 text-indigo-500"></i> Artikel & Info
+                </h3>
+            </div>
+            <div id="blogGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Blog items via JS -->
+            </div>
         </div>
         
     </main>
@@ -186,6 +198,41 @@
             <!-- Diisi dari JS -->
         </div>
     </footer>
+
+    <!-- ========================================== -->
+    <!-- MODAL POP-UP PROMO (THE HOLY TRINITY)      -->
+    <!-- ========================================== -->
+    <div id="promoPopupModal" class="fixed inset-0 z-[250] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm transition-opacity" onclick="closePromoPopup()"></div>
+        <div class="relative bg-white rounded-3xl shadow-2xl w-full max-w-sm overflow-hidden z-10 transform transition-all scale-95 opacity-0" id="promoPopupContent">
+            <button onclick="closePromoPopup()" class="absolute top-3 right-3 w-8 h-8 flex items-center justify-center bg-black/20 hover:bg-black/40 text-white rounded-full z-20 backdrop-blur transition-colors">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+            <img id="popupImg" src="" class="w-full h-48 sm:h-56 object-cover bg-slate-100">
+            <div class="p-6 text-center">
+                <p id="popupDesc" class="text-sm text-slate-600 mb-6 leading-relaxed font-medium"></p>
+                <a id="popupBtn" href="#" onclick="closePromoPopup()" class="inline-block w-full py-3.5 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-bold rounded-xl shadow-lg shadow-pink-500/30 transition-all transform active:scale-95"></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- MODAL TENTANG KAMI (THE HOLY TRINITY)      -->
+    <!-- ========================================== -->
+    <div id="aboutModal" class="fixed inset-0 z-[150] hidden">
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeAboutModal()"></div>
+        <div class="absolute bottom-0 left-0 right-0 max-w-3xl mx-auto h-[85vh] bg-white rounded-t-3xl shadow-2xl flex flex-col transform transition-transform duration-300 translate-y-full" id="aboutContent">
+            <div class="p-5 border-b border-slate-100 flex justify-between items-center bg-white rounded-t-3xl shrink-0">
+                <h3 class="font-bold text-lg text-slate-800 flex items-center gap-2"><i data-lucide="info" class="w-5 h-5 text-blue-500"></i> Tentang Kami</h3>
+                <button onclick="closeAboutModal()" class="p-2 bg-slate-100 hover:bg-slate-200 rounded-full text-slate-500 transition-colors"><i data-lucide="x" class="w-4 h-4"></i></button>
+            </div>
+            <div class="flex-1 overflow-y-auto p-6 bg-slate-50 hide-scrollbar">
+                <div id="aboutText" class="prose prose-sm max-w-none text-slate-600 whitespace-pre-wrap leading-relaxed">
+                    <!-- Text Injected via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- ========================================== -->
     <!-- MODAL DETAIL PRODUK (DENGAN VARIAN) -->
@@ -432,14 +479,15 @@
             }).format(angka);
         };
         
-        // SCRIPT URL (DEPLOYS SCRIPT KLIEN YANG BARU)
-        var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzGPPtICNutHm8176gPn3pKm3ig38ItD_AydOPL-vbZX5-Dt5r9WYaSt_fRrLluN5is/exec';
+        // SCRIPT URL (PASTIKAN SUDAH DIGANTI DENGAN DEPLOY APP SCRIPT ANDA)
+        var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz2KfFunnBQ0QI-R9hmwP4dfn33dkEiR8389V5s1QGo-JI8zVchlB6sLmToWM53xmJGrQ/exec';
 
         let storeData = {};
-        let appSettings = {}; // Tambahan Variabel Global Banner
+        let appSettings = {};
         let products = [];
         let globalCategories = [];
         let globalShipping = [];
+        let globalArticles = [];
         let activeCategory = ''; 
         let cart = [];
         
@@ -457,11 +505,10 @@
         let secretTapCount = 0;
         let secretTapTimer;
 
-        // Fetch Data Toko & Katalog (VERSI SINGLE STORE)
+        // Fetch Data Toko & Katalog
         async function fetchStoreCatalog() {
             try {
                 let fd = new FormData();
-                // Nggak perlu lagi kirim parameter slug, langsung minta katalog!
                 fd.append('action', 'get_store_catalog');
 
                 const response = await fetch(SCRIPT_URL, { 
@@ -475,13 +522,14 @@
                     products = res.products;
                     globalCategories = res.categories || [];
                     globalShipping = res.shipping_rates || [];
-                    appSettings = res.app_settings || {}; // Tangkap data App Settings
+                    globalArticles = res.articles || [];
+                    appSettings = res.app_settings || {};
                     buildStoreUI();
                 } else {
-                    showLoaderError("Gagal memuat data katalog. Pastikan setting Google Sheet benar.");
+                    showLoaderError(res.message || "Toko tidak ditemukan.");
                 }
             } catch(e) {
-                showLoaderError("Gagal terhubung ke server database.");
+                showLoaderError("Gagal terhubung ke server.");
             }
         }
 
@@ -567,7 +615,7 @@
                 } catch(e) {}
             }
 
-            // Render Legal Settings
+            // Render Legal Settings & About Us
             const legalLinks = document.getElementById('legalLinks');
             let legalHtml = "";
             let legalParsed = {};
@@ -575,7 +623,14 @@
                 if(storeData.legal_settings) legalParsed = JSON.parse(storeData.legal_settings); 
             } catch(e) {}
             
+            // THE HOLY TRINITY: TENTANG KAMI
+            if(appSettings.about_us_text && appSettings.about_us_text.trim() !== '') {
+                let encodedAbout = encodeURIComponent(appSettings.about_us_text);
+                legalHtml += `<button onclick="openAboutModal(\`${encodedAbout}\`)" class="hover:text-emerald-500 transition-colors">Tentang Kami</button>`;
+            }
+
             if(legalParsed.tos_active === 'on') {
+                if(legalHtml !== "") legalHtml += `<span class="text-slate-300">•</span>`;
                 let encodedTos = encodeURIComponent(legalParsed.tos_content || '');
                 legalHtml += `<button onclick="openLegalModal('Syarat & Ketentuan', \`${encodedTos}\`)" class="hover:text-emerald-500 transition-colors">Syarat & Ketentuan</button>`;
             }
@@ -616,6 +671,13 @@
 
             renderCategoryFilter();
             renderProductGrid(products);
+            
+            // THE HOLY TRINITY: RENDER BLOG SECTION
+            if (appSettings.show_blog_section === 'on' && globalArticles.length > 0) {
+                document.getElementById('blogSection').classList.remove('hidden');
+                renderBlogGrid(globalArticles);
+            }
+
             refreshIcons();
 
             // Secret Tap
@@ -624,6 +686,77 @@
             }
 
             injectPixels();
+
+            // THE HOLY TRINITY: POP-UP PROMO WELCOME
+            if (appSettings.show_popup === 'on' && !sessionStorage.getItem('promoPopupShown')) {
+                setTimeout(() => {
+                    showPromoPopup(appSettings);
+                }, 1500); // Tunda sebentar biar elegan
+            }
+        }
+
+        // ==========================================
+        // THE HOLY TRINITY: LOGIC POP-UP & BLOG
+        // ==========================================
+        function showPromoPopup(settings) {
+            document.getElementById('popupImg').src = settings.popup_image || 'https://placehold.co/500x500/ec4899/ffffff?text=Promo';
+            document.getElementById('popupDesc').innerText = settings.popup_desc || '';
+            
+            const btn = document.getElementById('popupBtn');
+            btn.innerText = settings.popup_btn_text || 'Lihat Promo';
+            btn.href = settings.popup_btn_link || '#';
+            
+            const modal = document.getElementById('promoPopupModal');
+            const content = document.getElementById('promoPopupContent');
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => { 
+                content.classList.remove('scale-95', 'opacity-0'); 
+                content.classList.add('scale-100', 'opacity-100'); 
+            }, 10);
+            
+            // Tandai bahwa pop-up sudah pernah muncul di sesi ini
+            sessionStorage.setItem('promoPopupShown', 'true');
+        }
+
+        function closePromoPopup() {
+            const modal = document.getElementById('promoPopupModal');
+            const content = document.getElementById('promoPopupContent');
+            content.classList.remove('scale-100', 'opacity-100'); 
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => { modal.classList.add('hidden'); }, 300);
+        }
+
+        function openAboutModal(encodedText) {
+            document.getElementById('aboutText').innerHTML = decodeURIComponent(encodedText);
+            const modal = document.getElementById('aboutModal');
+            const content = document.getElementById('aboutContent');
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => { 
+                content.classList.replace('translate-y-full', 'translate-y-0'); 
+            }, 10);
+            refreshIcons();
+        }
+
+        function closeAboutModal() {
+            const modal = document.getElementById('aboutModal');
+            const content = document.getElementById('aboutContent');
+            content.classList.replace('translate-y-0', 'translate-y-full');
+            setTimeout(() => { modal.classList.add('hidden'); }, 300);
+        }
+
+        function renderBlogGrid(articles) {
+            const grid = document.getElementById('blogGrid');
+            grid.innerHTML = articles.map(a => `
+                <a href="artikel.html?slug=${a.slug}" class="flex items-center gap-4 bg-white p-3 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md hover:border-indigo-200 transition-all group">
+                    <img src="${a.img || 'https://placehold.co/100x100/e2e8f0/64748b?text=News'}" class="w-20 h-20 rounded-xl object-cover shrink-0">
+                    <div class="flex-1 min-w-0 py-1">
+                        <h4 class="font-bold text-slate-800 text-sm line-clamp-2 group-hover:text-indigo-600 transition-colors leading-snug">${a.title}</h4>
+                        <p class="text-[10px] text-slate-400 mt-2 flex items-center gap-1 font-medium"><i data-lucide="calendar" class="w-3 h-3"></i> ${new Date(a.date).toLocaleDateString('id-ID')}</p>
+                    </div>
+                </a>
+            `).join('');
         }
 
         // Tracking Pixels
@@ -681,7 +814,7 @@
         function renderCategoryFilter() {
             const container = document.getElementById('categoryFilterContainer');
             if (globalCategories.length === 0) {
-                container.classList.add('hidden'); // Sembunyikan kalau gak ada kategori aktif
+                container.classList.add('hidden'); 
                 return;
             } else {
                 container.classList.remove('hidden');
@@ -689,7 +822,6 @@
             
             let html = `<button onclick="setCategory('')" id="cat-all" class="cat-btn snap-start px-4 py-2 bg-emerald-500 text-white rounded-full text-xs font-bold whitespace-nowrap shadow-sm transition-colors border border-emerald-500">Semua Produk</button>`;
             
-            // Sort berdasarkan sort_order
             const sortedCats = [...globalCategories].sort((a,b) => a.sort - b.sort);
             sortedCats.forEach(c => {
                 let prefix = c.parent_id ? '↳ ' : '';
@@ -739,9 +871,7 @@
                 if(vars.length > 0) {
                     hasVariant = true; 
                 }
-            } catch(e) {
-                console.error("Error parse variant saat render", e);
-            }
+            } catch(e) {}
             
             let variantBadgeHtml = '';
             if (hasVariant) {
@@ -1120,6 +1250,7 @@
             try {
                 let fd = new FormData();
                 fd.append('action', 'validate_coupon');
+                fd.append('id_user_toko', storeData.id);
                 fd.append('kode_kupon', code);
                 fd.append('subtotal', posSubtotal);
 
@@ -1245,6 +1376,7 @@
             try {
                 let fd = new FormData();
                 fd.append('action', 'add_order'); 
+                fd.append('id_user_toko', storeData.id); 
                 fd.append('nama_pembeli', buyer); 
                 fd.append('total_belanja', posGrandTotal); 
                 fd.append('status', 'Baru'); 
