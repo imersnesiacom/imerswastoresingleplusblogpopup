@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panduan Instalasi & Setup iMersWAstore (Single Store)</title>
+  <meta name="description" content="Panduan instalasi iMersWAstore Apps edisi Single Store dari persiapan Google Sheets, Apps Script, deploy backend, koneksi frontend, hosting, hingga login pertama." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:#07142d;
+      --ink:#13213f;
+      --muted:#64748b;
+      --blue:#2563eb;
+      --cyan:#06b6d4;
+      --green:#22c55e;
+      --mint:#7ee6b8;
+      --soft:#f6f9fd;
+      --line:#e5edf7;
+      --white:#ffffff;
+      --shadow:0 22px 70px rgba(8,22,47,.12);
+      --shadow-soft:0 12px 34px rgba(8,22,47,.08);
+      --radius:28px;
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:'Poppins',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      color:var(--ink);
+      background:#fff;
+      line-height:1.7;
+      overflow-x:hidden;
+    }
+    a { color:inherit; text-decoration:none; }
+    img { max-width:100%; display:block; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace; }
+    .container { width:min(1180px, calc(100% - 36px)); margin-inline:auto; }
+    .gradient-text {
+      background:linear-gradient(105deg,var(--blue),var(--cyan) 48%,var(--green));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .topbar {
+      position:sticky; top:0; z-index:50; height:74px;
+      background:rgba(255,255,255,.84); backdrop-filter:blur(18px);
+      border-bottom:1px solid rgba(229,237,247,.8);
+    }
+    .topbar-inner { height:74px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+    .logo { display:flex; align-items:center; gap:12px; font-weight:900; color:var(--navy); }
+    .logo img { height:42px; width:auto; object-fit:contain; }
+    .logo-fallback { display:none; align-items:center; gap:10px; font-weight:900; font-size:22px; }
+    .logo-mark { width:38px; height:38px; border-radius:14px; display:grid; place-items:center; color:white; background:linear-gradient(135deg,var(--blue),var(--cyan),var(--green)); box-shadow:0 12px 28px rgba(37,99,235,.22); }
+    .navlinks { display:flex; align-items:center; gap:20px; color:#475569; font-size:13px; font-weight:800; }
+    .navlinks a:hover { color:var(--blue); }
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      min-height:48px; padding:0 18px; border-radius:15px; font-weight:900; border:0;
+      transition:.2s ease; cursor:pointer; white-space:nowrap;
+    }
+    .btn-primary { color:white; background:linear-gradient(135deg,var(--blue),var(--cyan) 52%,var(--green)); box-shadow:0 16px 38px rgba(37,99,235,.24); }
+    .btn-light { color:var(--navy); background:#fff; border:1px solid var(--line); box-shadow:0 8px 22px rgba(8,22,47,.06); }
+    .btn:hover { transform:translateY(-2px); }
+    .hero {
+      position:relative; overflow:hidden; padding:90px 0 82px;
+      background:
+        radial-gradient(circle at 10% 12%, rgba(126,230,184,.38), transparent 26%),
+        radial-gradient(circle at 90% 4%, rgba(37,99,235,.15), transparent 26%),
+        linear-gradient(180deg,#fbfeff 0%,#f3faff 60%,#fff 100%);
+    }
+    .hero:before {
+      content:""; position:absolute; inset:0;
+      background-image:radial-gradient(rgba(37,99,235,.14) 1px, transparent 1px);
+      background-size:28px 28px; opacity:.65;
+      mask-image:linear-gradient(to bottom, transparent, black 20%, transparent 88%);
+      pointer-events:none;
+    }
+    .hero-grid { position:relative; display:grid; grid-template-columns:1.04fr .96fr; gap:56px; align-items:center; z-index:1; }
+    .eyebrow {
+      display:inline-flex; align-items:center; gap:8px; padding:9px 14px; border-radius:999px;
+      background:rgba(255,255,255,.78); border:1px solid rgba(37,99,235,.12); color:#0f4b79;
+      font-size:13px; font-weight:900; box-shadow:0 10px 24px rgba(8,22,47,.05);
+    }
+    h1, h2, h3 { font-family:'Montserrat','Poppins',system-ui,sans-serif; letter-spacing:-.04em; color:var(--navy); line-height:1.1; }
+    h1 { font-size:clamp(42px, 5.8vw, 74px); margin:22px 0 20px; }
+    .lead { max-width:690px; color:#516077; font-size:18px; }
+    .hero-actions { display:flex; flex-wrap:wrap; gap:14px; margin-top:30px; }
+    .hero-card {
+      border-radius:34px; background:rgba(255,255,255,.86); border:1px solid rgba(255,255,255,.9);
+      box-shadow:var(--shadow); padding:30px; backdrop-filter:blur(16px);
+    }
+    .hero-card h3 { font-size:24px; margin-bottom:18px; }
+    .stage-list { display:grid; gap:13px; }
+    .stage { display:flex; align-items:center; gap:13px; padding:14px 16px; border-radius:18px; background:#fff; border:1px solid var(--line); box-shadow:0 10px 24px rgba(8,22,47,.05); font-weight:800; }
+    .stage span { width:34px; height:34px; flex:0 0 34px; border-radius:12px; display:grid; place-items:center; color:#fff; background:linear-gradient(135deg,var(--blue),var(--cyan),var(--green)); font-size:14px; font-weight:900; }
+    .quick-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:28px; }
+    .qstat { background:#fff; border:1px solid var(--line); border-radius:20px; padding:18px; text-align:center; box-shadow:0 10px 24px rgba(8,22,47,.05); }
+    .qstat strong { display:block; font-size:26px; line-height:1; color:var(--blue); font-family:'Montserrat'; }
+    .qstat span { display:block; margin-top:8px; color:var(--muted); font-size:12px; font-weight:800; }
+    .main-wrap { background:var(--soft); padding:76px 0; }
+    .layout { display:grid; grid-template-columns:280px 1fr; gap:28px; align-items:start; }
+    .toc { position:sticky; top:96px; border-radius:24px; padding:18px; background:#fff; border:1px solid var(--line); box-shadow:var(--shadow-soft); }
+    .toc-title { font-family:'Montserrat'; color:var(--navy); font-weight:900; margin-bottom:12px; }
+    .toc a { display:flex; align-items:center; gap:10px; padding:12px 12px; border-radius:14px; color:#526076; font-size:13px; font-weight:800; }
+    .toc a:hover { background:#f0f7ff; color:var(--blue); }
+    .toc .dot { width:8px; height:8px; border-radius:50%; background:linear-gradient(135deg,var(--blue),var(--green)); }
+    .content { display:grid; gap:28px; }
+    .section-card { background:#fff; border:1px solid var(--line); border-radius:30px; box-shadow:var(--shadow-soft); overflow:hidden; }
+    .section-header { padding:30px 32px; border-bottom:1px solid var(--line); background:linear-gradient(135deg,#fff,#f7fcff); }
+    .section-kicker { display:inline-flex; align-items:center; gap:8px; color:var(--blue); font-size:12px; font-weight:900; text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px; }
+    .section-header h2 { font-size:clamp(28px, 3.2vw, 42px); }
+    .section-body { padding:30px 32px; }
+    .steps { counter-reset:step; display:grid; gap:18px; }
+    .step { position:relative; padding:22px 22px 22px 76px; background:#fbfdff; border:1px solid #e9f0fa; border-radius:22px; }
+    .step:before {
+      counter-increment:step; content:counter(step); position:absolute; left:20px; top:22px;
+      width:38px; height:38px; display:grid; place-items:center; border-radius:14px;
+      color:#fff; background:linear-gradient(135deg,var(--blue),var(--cyan),var(--green)); font-weight:900;
+      box-shadow:0 10px 24px rgba(37,99,235,.18);
+    }
+    .step h3 { font-size:18px; letter-spacing:-.02em; margin-bottom:8px; }
+    .step p, .step li { color:#526076; }
+    ol, ul { padding-left:20px; }
+    li { margin:6px 0; }
+    .callout {
+      display:flex; gap:14px; padding:18px 18px; border-radius:20px; border:1px solid rgba(37,99,235,.15);
+      background:linear-gradient(135deg,rgba(37,99,235,.06),rgba(126,230,184,.12)); margin:18px 0;
+    }
+    .callout .icon { width:40px; height:40px; flex:0 0 40px; border-radius:14px; display:grid; place-items:center; color:#fff; background:linear-gradient(135deg,var(--blue),var(--green)); font-weight:900; }
+    .callout strong { color:var(--navy); }
+    .file-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:14px; }
+    .file-item { padding:14px 16px; border:1px solid var(--line); border-radius:16px; background:#fff; display:flex; justify-content:space-between; gap:10px; align-items:center; font-weight:800; }
+    .file-item small { color:var(--muted); font-weight:700; }
+    .code-card { position:relative; margin:18px 0; border-radius:20px; overflow:hidden; border:1px solid #183257; background:#07142d; box-shadow:0 16px 38px rgba(8,22,47,.12); }
+    .code-head { display:flex; justify-content:space-between; align-items:center; padding:12px 14px; color:#c7d7ee; border-bottom:1px solid rgba(255,255,255,.08); font-size:12px; font-weight:800; }
+    .copy-btn { border:0; border-radius:10px; padding:8px 11px; background:rgba(255,255,255,.1); color:#fff; font-weight:800; cursor:pointer; }
+    pre { padding:18px; overflow:auto; color:#dffcf0; font-size:13px; line-height:1.65; }
+    .option-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+    .option { padding:22px; border:1px solid var(--line); border-radius:24px; background:#fbfdff; }
+    .option h3 { font-size:20px; margin-bottom:12px; }
+    .login-box { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin:18px 0; }
+    .cred { border-radius:20px; border:1px solid var(--line); padding:18px; background:#fff; }
+    .cred small { color:var(--muted); font-weight:800; }
+    .cred strong { display:block; font-size:24px; color:var(--navy); margin-top:4px; }
+    .troubles { display:grid; gap:14px; }
+    .trouble { padding:18px; border-radius:20px; background:#fff; border:1px solid var(--line); }
+    .trouble strong { color:var(--navy); }
+    .footer-cta { padding:80px 0; background:linear-gradient(135deg,#07142d,#123466 58%,#155e75); color:white; text-align:center; }
+    .footer-cta h2 { color:white; max-width:860px; margin:0 auto 16px; font-size:clamp(32px,4.5vw,58px); }
+    .footer-cta p { color:#c7d7ee; max-width:760px; margin:0 auto 26px; font-size:17px; }
+    footer { padding:28px 0; background:#061024; color:#8aa0bd; font-size:13px; }
+    footer .container { display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px; }
+    .mobile-nav { display:none; }
+    @media(max-width:980px) {
+      .navlinks { display:none; }
+      .hero-grid, .layout { grid-template-columns:1fr; }
+      .toc { position:relative; top:auto; }
+      .toc-links { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .quick-stats { grid-template-columns:repeat(2,1fr); }
+      .option-grid { grid-template-columns:1fr; }
+    }
+    @media(max-width:640px) {
+      body { padding-bottom:86px; }
+      .topbar { height:66px; }
+      .topbar-inner { height:66px; }
+      .logo img { height:34px; }
+      h1 { font-size:42px; }
+      .hero { padding:58px 0 58px; }
+      .hero-actions .btn { width:100%; }
+      .hero-card, .section-header, .section-body { padding:22px; }
+      .step { padding:76px 18px 18px; }
+      .step:before { top:20px; }
+      .file-grid, .login-box { grid-template-columns:1fr; }
+      .toc { display:none; }
+      .quick-stats { grid-template-columns:1fr 1fr; }
+      .mobile-nav {
+        display:block; position:fixed; left:14px; right:14px; bottom:14px; z-index:80;
+        background:rgba(255,255,255,.92); border:1px solid rgba(255,255,255,.9); backdrop-filter:blur(18px);
+        border-radius:24px; box-shadow:0 20px 70px rgba(8,22,47,.22); padding:8px;
+      }
+      .mobile-nav-inner { display:grid; grid-template-columns:repeat(5,1fr); gap:4px; }
+      .mobile-nav a { display:grid; place-items:center; gap:2px; padding:8px 4px; border-radius:16px; font-size:10px; font-weight:900; color:#526076; }
+      .mobile-nav a:first-child { background:linear-gradient(135deg,var(--blue),var(--green)); color:white; }
+    }
+    @media print {
+      .topbar, .toc, .mobile-nav, .hero-actions, .copy-btn { display:none !important; }
+      body { background:#fff; padding-bottom:0; }
+      .hero, .main-wrap { background:#fff; padding:24px 0; }
+      .layout { display:block; }
+      .section-card { box-shadow:none; break-inside:avoid; margin-bottom:18px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="logo" href="#top">
+        <i data-lucide="store" style="color:var(--blue)"></i> iMersWAstore
+      </a>
+      <nav class="navlinks" aria-label="Navigasi panduan">
+        <a href="#tahap-1">Database</a>
+        <a href="#tahap-2">Backend</a>
+        <a href="#tahap-3">Frontend</a>
+        <a href="#tahap-4">Go Live</a>
+        <a href="#tahap-5">Login</a>
+      </nav>
+      <a class="btn btn-primary" href="#tahap-1">Mulai Setup</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">🛠️ Panduan Instalasi & Setup</span>
+          <h1>iMersWAstore <span class="gradient-text">Single Store</span></h1>
+          <p class="lead">Panduan ini membantu Anda menyiapkan database Google Sheets, deploy backend Apps Script, menghubungkan frontend HTML, hosting website, sampai login pertama sebagai Admin.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#tahap-1">Ikuti Panduan</a>
+            <button class="btn btn-light" onclick="window.print()">Cetak / Simpan PDF</button>
+          </div>
+          <div class="quick-stats">
+            <div class="qstat"><strong>5</strong><span>Tahap Setup</span></div>
+            <div class="qstat"><strong>3</strong><span>File Utama</span></div>
+            <div class="qstat"><strong>Cepat</strong><span>Proses Loading</span></div>
+            <div class="qstat"><strong>100%</strong><span>Siap Pakai</span></div>
+          </div>
+        </div>
+        <aside class="hero-card">
+          <h3>Alur Cepat Setup</h3>
+          <div class="stage-list">
+            <div class="stage"><span>1</span>Copy Google Sheets Master</div>
+            <div class="stage"><span>2</span>Setup database & dummy data</div>
+            <div class="stage"><span>3</span>Deploy Apps Script (Web App)</div>
+            <div class="stage"><span>4</span>Tempel SCRIPT URL ke file HTML</div>
+            <div class="stage"><span>5</span>Upload ke Hosting & Selesai</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="main-wrap">
+      <div class="container layout">
+        <aside class="toc" aria-label="Daftar isi">
+          <div class="toc-title">Daftar Isi</div>
+          <div class="toc-links">
+            <a href="#tahap-1"><span class="dot"></span>Persiapan Database</a>
+            <a href="#tahap-2"><span class="dot"></span>Deploy Backend</a>
+            <a href="#tahap-3"><span class="dot"></span>Koneksi Frontend</a>
+            <a href="#tahap-4"><span class="dot"></span>Hosting & Go Live</a>
+            <a href="#tahap-5"><span class="dot"></span>Login Admin</a>
+            <a href="#troubleshooting"><span class="dot"></span>Troubleshooting</a>
+          </div>
+        </aside>
+
+        <div class="content">
+          <article class="section-card" id="tahap-1">
+            <div class="section-header">
+              <div class="section-kicker">Tahap 1</div>
+              <h2>Persiapan Database <span class="gradient-text">Google Sheets & Apps Script</span></h2>
+            </div>
+            <div class="section-body">
+              <div class="steps">
+                <section class="step">
+                  <h3>Salin / Copy File Master</h3>
+                  <ol>
+                    <li>Buka link Google Sheets Master yang sudah diberikan pada halaman akses produk.</li>
+                    <li>Klik menu <strong>File &gt; Make a copy</strong> atau <strong>Buat salinan</strong>.</li>
+                    <li>Beri nama file sesuai kebutuhan, misalnya <strong>Database Toko Baju</strong>.</li>
+                    <li>Simpan di Google Drive Anda dan biarkan tab Google Sheets tetap terbuka.</li>
+                  </ol>
+                </section>
+                <section class="step">
+                  <h3>Buka Google Apps Script</h3>
+                  <ol>
+                    <li>Di file Google Sheets salinan Anda, klik <strong>Extensions (Ekstensi) &gt; Apps Script</strong>.</li>
+                    <li>Tab baru berisi kode akan terbuka. Inilah backend sistem Anda.</li>
+                  </ol>
+                </section>
+                <section class="step">
+                  <h3>Eksekusi Setup Database & Dummy Data</h3>
+                  <ol>
+                    <li>Kembali ke tab Google Sheets Anda.</li>
+                    <li>Tunggu beberapa detik sampai muncul menu baru <strong>⚙️ iMersWAstore Setup</strong>.</li>
+                    <li>Klik menu tersebut, lalu pilih <strong>🚀 Setup Database Single Store</strong>.</li>
+                  </ol>
+                  <div class="callout"><div class="icon">!</div><div><strong>Catatan:</strong> Menu baru biasanya muncul di deretan menu atas Google Sheets, dekat menu Help/Bantuan.</div></div>
+                </section>
+                <section class="step">
+                  <h3>Berikan Izin / Otorisasi Google</h3>
+                  <ol>
+                    <li>Saat muncul pop-up <strong>Authorization Required</strong>, klik <strong>Continue</strong>.</li>
+                    <li>Pilih akun Google Anda.</li>
+                    <li>Jika muncul peringatan <strong>Google hasn’t verified this app</strong>, itu normal.</li>
+                    <li>Klik <strong>Advanced</strong>, lalu pilih <strong>Go to [Nama Script Anda] (unsafe)</strong>.</li>
+                    <li>Scroll ke bawah dan klik <strong>Allow</strong>.</li>
+                    <li>Setelah izin diberikan, klik ulang menu <strong>⚙️ iMersWAstore Setup &gt; 🚀 Setup Database Single Store</strong>.</li>
+                    <li>Tunggu sampai notifikasi sukses muncul dan cek tabel (sheet) baru akan terbentuk di bawah.</li>
+                  </ol>
+                  <div class="callout"><div class="icon">✓</div><div><strong>Sangat penting:</strong> Proses setup pertama biasanya batal setelah otorisasi. Klik ulang menu setup satu kali lagi agar tabel database benar-benar terbentuk.</div></div>
+                </section>
+              </div>
+            </div>
+          </article>
+
+          <article class="section-card" id="tahap-2">
+            <div class="section-header">
+              <div class="section-kicker">Tahap 2</div>
+              <h2>Deploy Backend & Dapatkan <span class="gradient-text">SCRIPT URL</span></h2>
+            </div>
+            <div class="section-body">
+              <div class="steps">
+                <section class="step">
+                  <h3>Ubah Apps Script Menjadi API</h3>
+                  <ol>
+                    <li>Buka kembali tab <strong>Apps Script</strong>.</li>
+                    <li>Di pojok kanan atas, klik <strong>Deploy &gt; New deployment</strong>.</li>
+                    <li>Pada panel sebelah kiri (titik gear), pastikan <strong>Select type</strong> memilih <strong>Web app</strong>.</li>
+                    <li>Isi pengaturan deploy seperti berikut:</li>
+                  </ol>
+                  <div class="file-grid">
+                    <div class="file-item"><span>Description</span><small>Versi 1.0 Live</small></div>
+                    <div class="file-item"><span>Execute as</span><small>Me / Email Anda</small></div>
+                    <div class="file-item"><span>Who has access</span><small>Anyone</small></div>
+                  </div>
+                  <div class="callout"><div class="icon">!</div><div><strong>Jangan pilih akses lain:</strong> Sangat krusial memilih <strong>Anyone</strong> (Siapa Saja) agar website bisa membaca database.</div></div>
+                </section>
+                <section class="step">
+                  <h3>Copy Web App URL</h3>
+                  <ol>
+                    <li>Klik <strong>Deploy</strong> dan tunggu proses selesai.</li>
+                    <li>Anda akan mendapatkan <strong>Web app URL</strong> yang panjang (biasanya berakhiran <strong>/exec</strong>).</li>
+                    <li>Salin URL tersebut. URL ini akan dipakai pada Tahap 3.</li>
+                  </ol>
+                </section>
+              </div>
+            </div>
+          </article>
+
+          <article class="section-card" id="tahap-3">
+            <div class="section-header">
+              <div class="section-kicker">Tahap 3</div>
+              <h2>Menghubungkan Backend ke <span class="gradient-text">Frontend HTML</span></h2>
+            </div>
+            <div class="section-body">
+              <p>Buka folder frontend yang berisi kumpulan fail HTML menggunakan Visual Studio Code, Notepad++, atau editor teks bawaan komputer. Anda harus menukar pemboleh ubah <strong>SCRIPT_URL</strong> dengan URL dari Tahap 2.</p>
+              <div class="code-card">
+                <div class="code-head"><span>Cari kod ini dan tukar URL-nya</span><button class="copy-btn" data-copy="code-1">Copy</button></div>
+                <pre id="code-1">var SCRIPT_URL = 'PASTE_URL_WEB_APP_ANDA_DISINI';</pre>
+              </div>
+              
+              <h3 style="margin:24px 0 12px">Lakukan secara teliti pada 3 fail utama berikut:</h3>
+              <p style="margin-bottom: 16px; font-size: 14px; color: var(--muted);">Sebagai panduan, Anda boleh mencari pemboleh ubah <code>SCRIPT_URL</code> di sekitar baris berikut (boleh gunakan fungsi <b>Ctrl + F</b> atau <b>Cmd + F</b> dalam editor teks Anda):</p>
+              <div class="file-grid" style="grid-template-columns: 1fr; gap: 16px;">
+                <div class="file-item">
+                  <div><span style="font-size: 16px;"><b>dashboard.html</b></span><br><span style="font-size: 13px; font-weight: normal; color: var(--muted);">Halaman Panel Admin & Kasir POS</span></div>
+                  <small style="background: #f0fdf4; color: #166534; padding: 6px 12px; border-radius: 8px; border: 1px solid #bbf7d0;">📌 Cari di sekitar <b>Baris 69</b></small>
+                </div>
+                <div class="file-item">
+                  <div><span style="font-size: 16px;"><b>index.html</b></span><br><span style="font-size: 13px; font-weight: normal; color: var(--muted);">Halaman Etalase Utama Toko</span></div>
+                  <small style="background: #f0fdf4; color: #166534; padding: 6px 12px; border-radius: 8px; border: 1px solid #bbf7d0;">📌 Cari di sekitar <b>Baris 436</b></small>
+                </div>
+                <div class="file-item">
+                  <div><span style="font-size: 16px;"><b>login.html</b></span><br><span style="font-size: 13px; font-weight: normal; color: var(--muted);">Halaman Login Admin/Kasir</span></div>
+                  <small style="background: #f0fdf4; color: #166534; padding: 6px 12px; border-radius: 8px; border: 1px solid #bbf7d0;">📌 Cari di sekitar <b>Baris 96</b></small>
+                </div>
+              </div>
+              <div class="callout"><div class="icon">✓</div><div><strong>Checklist:</strong> Pastikan tiada jarak yang berlebihan, tanda kutip (' ') tidak terpadam, dan simpan semua fail (Ctrl+S).</div></div>
+            </div>
+          </article>
+
+          <article class="section-card" id="tahap-4">
+            <div class="section-header">
+              <div class="section-kicker">Tahap 4</div>
+              <h2>Hosting & Deploy ke Internet <span class="gradient-text">Go Live</span></h2>
+            </div>
+            <div class="section-body">
+              <p>Berkat arsitektur Single Store, file frontend ini 100% statis (hanya HTML). Anda bisa meng-hosting-nya <strong>di mana saja dengan sangat mudah</strong>. Baik hosting gratisan maupun berbayar.</p>
+              <div class="option-grid">
+                <section class="option">
+                  <h3>Opsi A: Hosting Gratis (Vercel/Netlify)</h3>
+                  <ol>
+                    <li>Buat akun di <strong>Vercel.com</strong> atau <strong>Netlify.com</strong>.</li>
+                    <li>Pilih opsi "Drag and Drop" atau "Deploy manually".</li>
+                    <li>Tarik (drag) folder yang berisi 3 file HTML tadi (index, dashboard, login) ke area deploy.</li>
+                    <li>Tunggu beberapa detik, website Anda langsung Live!</li>
+                  </ol>
+                  <div class="callout"><div class="icon">★</div><div><strong>Kelebihan:</strong> Gratis, server super cepat, dan langsung dapat sertifikat SSL (HTTPS).</div></div>
+                </section>
+                <section class="option">
+                  <h3>Opsi B: cPanel (Hosting Tradisional)</h3>
+                  <ol>
+                    <li>Login ke cPanel atau panel hosting Niagahoster, Hostinger, dll.</li>
+                    <li>Buka <strong>File Manager</strong> lalu masuk ke folder <strong>public_html</strong> atau folder domain Anda.</li>
+                    <li>Klik Upload, dan pilih 3 file HTML tersebut (index.html, dashboard.html, login.html).</li>
+                    <li>Selesai! Buka domain Anda di browser.</li>
+                  </ol>
+                </section>
+              </div>
+            </div>
+          </article>
+
+          <article class="section-card" id="tahap-5">
+            <div class="section-header">
+              <div class="section-kicker">Tahap 5</div>
+              <h2>Login Pertama Kali <span class="gradient-text">Admin</span></h2>
+            </div>
+            <div class="section-body">
+              <ol>
+                <li>Buka halaman login website yang sudah Anda hosting: <strong>https://domain-anda.com/login.html</strong></li>
+                <li>Gunakan data login default yang sudah terbuat saat Anda menjalankan menu Setup di Google Sheets.</li>
+                <li>Setelah berhasil login, Anda akan diarahkan ke <strong>dashboard.html</strong>. Instalasi Selesai!</li>
+              </ol>
+              <div class="login-box">
+                <div class="cred"><small>Username Default</small><strong>admin</strong></div>
+                <div class="cred"><small>Password Default</small><strong>admin123</strong></div>
+              </div>
+              <div class="callout"><div class="icon">!</div><div><strong>Langkah berikutnya:</strong> Segera buka menu <strong>Pengaturan Toko</strong> di Dashboard untuk mengubah Nama Toko, Tema, WhatsApp Gateway, dan mengganti Password Admin demi keamanan.</div></div>
+            </div>
+          </article>
+
+          <article class="section-card" id="troubleshooting">
+            <div class="section-header">
+              <div class="section-kicker">Bantuan</div>
+              <h2>Troubleshooting <span class="gradient-text">Masalah Umum</span></h2>
+            </div>
+            <div class="section-body">
+              <div class="troubles">
+                <div class="trouble"><strong>Halaman Web selalu loading / macet?</strong><br>Penyebab utamanya adalah URL Apps Script salah, atau saat Deploy Anda tidak memilih opsi <strong>Who has access: Anyone</strong>. Silakan ulangi Tahap 2 dan pastikan memilih "Anyone".</div>
+                <div class="trouble"><strong>Produk tidak muncul di katalog?</strong><br>Pastikan Anda tidak menghapus atau mengubah nama Header (baris pertama) di Google Sheets. Sistem membaca kolom berdasarkan posisi aslinya.</div>
+                <div class="trouble"><strong>Lupa password admin?</strong><br>Tidak perlu panik. Anda bisa buka Google Sheets, masuk ke tab <strong>Users</strong>, dan hapus teks rumit di kolom Password. Ganti dengan teks biasa (misal: <code>rahasia123</code>). Nanti setelah berhasil login, segera ubah lagi via Dashboard agar sistem otomatis mengenkripsinya.</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer-cta">
+      <div class="container">
+        <h2>Toko Online Anda Siap <span class="gradient-text">Melesat</span>!</h2>
+        <p>Ikuti 5 tahapan simpel di atas untuk mengatur database, backend, dan hosting dalam hitungan menit.</p>
+        <a class="btn btn-primary" href="#tahap-1">Mulai Setup Sekarang</a>
+      </div>
+    </section>
+  </main>
+
+  <nav class="mobile-nav" aria-label="Navigasi mobile">
+    <div class="mobile-nav-inner">
+      <a href="#top">Home</a>
+      <a href="#tahap-1">DB</a>
+      <a href="#tahap-2">API</a>
+      <a href="#tahap-4">Live</a>
+      <a href="#tahap-5">Login</a>
+    </div>
+  </nav>
+
+  <footer>
+    <div class="container">
+      <span>iMersWAstore Single Store Edition</span>
+      <span>Panduan Cepat Instalasi</span>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+    document.querySelectorAll('.copy-btn').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const id = btn.getAttribute('data-copy');
+        const el = document.getElementById(id);
+        if (!el) return;
+        try {
+          await navigator.clipboard.writeText(el.innerText);
+          const old = btn.innerText;
+          btn.innerText = 'Tersalin!';
+          setTimeout(() => btn.innerText = old, 1200);
+        } catch(e) {
+          btn.innerText = 'Select manual';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
