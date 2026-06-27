@@ -49,17 +49,14 @@
         }
     </style>
 </head>
-<body class="font-sans text-slate-700 bg-slate-50 antialiased">
+<body class="font-sans text-slate-700 bg-slate-50 antialiased pb-20 md:pb-0">
 
     <!-- Navbar -->
     <nav class="fixed w-full bg-white/90 backdrop-blur-md z-50 border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
                 <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center text-white shadow-lg">
-                        <i data-lucide="store" class="w-6 h-6"></i>
-                    </div>
-                    <span class="font-heading font-bold text-xl text-dark tracking-tight">iMers<span class="text-primary">Instal</span></span>
+                    <img src="https://imersnesia.com/wp-content/uploads/2026/06/logo-teks-imerswastore-1.png" alt="iMersWAstore Logo" class="h-8 md:h-10 object-contain">
                 </div>
                 <div class="hidden md:flex space-x-8">
                     <a href="#fitur" class="text-slate-600 hover:text-primary font-medium transition-colors">Fitur Unggulan</a>
@@ -116,6 +113,32 @@
                 <div>
                     <div class="text-3xl font-heading font-bold text-dark mb-1"><i data-lucide="headset" class="w-8 h-8 mx-auto text-primary"></i></div>
                     <div class="text-sm text-slate-500 font-medium uppercase tracking-wide">Support Bantuan</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="py-16 bg-slate-900 overflow-hidden relative">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-primary rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-secondary rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="bg-gradient-to-r from-slate-800 to-slate-900 rounded-3xl p-8 md:p-12 border border-slate-700 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 hover:border-slate-600 transition-colors">
+                <div class="text-center md:text-left flex-1">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-secondary font-medium text-xs mb-4">
+                        <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span> Live Preview
+                    </div>
+                    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-3">Penasaran Seperti Apa Jadinya?</h2>
+                    <p class="text-slate-400 text-sm md:text-base leading-relaxed mb-6 max-w-lg mx-auto md:mx-0">Coba langsung <em>experience</em> belanja dan kelola toko menggunakan sistem iMersWAstore. Klik tombol di bawah untuk melihat demo toko online yang sudah jadi.</p>
+                    
+                    <a href="https://jualanplus.partner.web.id/" target="_blank" class="inline-flex items-center justify-center gap-2 bg-white text-slate-900 hover:bg-slate-100 px-8 py-3.5 rounded-xl font-bold text-sm transition-all shadow-lg hover:-translate-y-1">
+                        <i data-lucide="external-link" class="w-5 h-5"></i> Lihat Demo Toko
+                    </a>
+                </div>
+                
+                <div class="relative w-full max-w-sm md:max-w-md shrink-0 rounded-2xl overflow-hidden shadow-2xl border-4 border-slate-800 transform md:rotate-2 hover:rotate-0 transition-transform duration-500 mx-auto mt-6 md:mt-0">
+                    <img src="https://imersnesia.com/wp-content/uploads/2026/06/imerswastore-smart.webp" alt="Demo Toko iMersWAstore" class="w-full h-auto object-cover">
                 </div>
             </div>
         </div>
@@ -184,7 +207,7 @@
                         
                         <!-- Image Preview -->
                         <div class="mb-6 rounded-xl overflow-hidden shadow-sm border border-slate-200">
-                            <img src="imerswstore-lite.webp" alt="Paket Lite iMersWAstore" class="w-full h-40 object-cover object-top hover:scale-105 transition-transform duration-500">
+                            <img src="https://imersnesia.com/wp-content/uploads/2026/06/imerswstore-lite.webp" alt="Paket Lite iMersWAstore" class="w-full h-40 object-cover object-top hover:scale-105 transition-transform duration-500">
                         </div>
 
                         <div class="mb-6">
@@ -232,7 +255,7 @@
 
                         <!-- Image Preview -->
                         <div class="mb-6 rounded-xl overflow-hidden shadow-md border border-slate-100 relative group">
-                            <img src="imerswastore-smart.webp" alt="Paket Smart iMersWAstore" class="w-full h-40 object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                            <img src="https://imersnesia.com/wp-content/uploads/2026/06/imerswastore-smart.webp" alt="Paket Smart iMersWAstore" class="w-full h-40 object-cover object-top group-hover:scale-105 transition-transform duration-500">
                             <div class="absolute inset-0 bg-dark/10 group-hover:bg-transparent transition-colors"></div>
                         </div>
 
@@ -278,7 +301,7 @@
 
                         <!-- Image Preview -->
                         <div class="mb-6 rounded-xl overflow-hidden shadow-sm border border-slate-200">
-                            <img src="imerswastore-premium.webp" alt="Paket Premium iMersWAstore" class="w-full h-40 object-cover object-top hover:scale-105 transition-transform duration-500">
+                            <img src="https://imersnesia.com/wp-content/uploads/2026/06/imerswastore-premium.webp" alt="Paket Premium iMersWAstore" class="w-full h-40 object-cover object-top hover:scale-105 transition-transform duration-500">
                         </div>
 
                         <div class="mb-6">
@@ -376,6 +399,31 @@
     <footer class="bg-dark border-t border-slate-800 py-8 text-center text-slate-400 text-sm">
         <p>&copy; 2026 iMersWAstore Installation Service. All rights reserved.</p>
     </footer>
+
+    <!-- Mobile Bottom Navbar -->
+    <div class="md:hidden fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur-sm border-t border-slate-200 shadow-[0_-4px_15px_rgba(0,0,0,0.05)] z-50 px-6 py-2.5 flex justify-between items-center pb-safe">
+        <a href="#" class="flex flex-col items-center gap-1 text-slate-500 hover:text-primary transition-colors">
+            <i data-lucide="home" class="w-5 h-5 text-blue-500"></i>
+            <span class="text-[10px] font-medium">Home</span>
+        </a>
+        <a href="#demo" class="flex flex-col items-center gap-1 text-slate-500 hover:text-primary transition-colors">
+            <i data-lucide="monitor-smartphone" class="w-5 h-5 text-purple-500"></i>
+            <span class="text-[10px] font-medium">Demo</span>
+        </a>
+        <a href="#fitur" class="flex flex-col items-center gap-1 text-slate-500 hover:text-primary transition-colors">
+            <i data-lucide="layout-grid" class="w-5 h-5 text-amber-500"></i>
+            <span class="text-[10px] font-medium">Fitur</span>
+        </a>
+        <a href="#paket" class="flex flex-col items-center gap-1 text-slate-500 hover:text-primary transition-colors relative">
+            <i data-lucide="shopping-bag" class="w-5 h-5 text-emerald-500"></i>
+            <span class="text-[10px] font-medium">Paket</span>
+            <span class="absolute -top-1 -right-1 bg-red-500 w-2.5 h-2.5 rounded-full border-2 border-white animate-pulse"></span>
+        </a>
+        <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20mau%20tanya%20soal%20jasa%20instalasi" target="_blank" class="flex flex-col items-center gap-1 text-slate-500 hover:text-primary transition-colors">
+            <i data-lucide="message-circle" class="w-5 h-5 text-[#25D366]"></i>
+            <span class="text-[10px] font-medium">Tanya</span>
+        </a>
+    </div>
 
     <!-- FAQ Script -->
     <script>
