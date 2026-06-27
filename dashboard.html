@@ -2209,11 +2209,14 @@
             document.getElementById('btnSubmitCheckout').innerText = "Memproses...";
             let detail = JSON.stringify(cart.map(c => `${c.name} (${c.qty}${c.unit || 'pcs'})`));
             
+            let apiItemsArr = cart.map(c => ({ id: c.id, variant_id: c.variant_id || null, name: c.name, qty: c.qty, unit: c.unit || 'pcs' }));
+
             const payload = {
                 nama_pembeli: document.getElementById('coNama').value || 'Pelanggan POS',
                 total_belanja: posGrandTotal,
                 status: 'Selesai',
                 detail_items: detail,
+                detail_items_raw: JSON.stringify(apiItemsArr),
                 metode_pembayaran: method,
                 uang_bayar: uang,
                 kembalian: change,
