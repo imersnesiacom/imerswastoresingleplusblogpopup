@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jasa Instalasi iMersWAstore - Solusi Toko Online & POS UMKM</title>
+    <meta name="description" content="Jasa pembuatan toko online dan sistem kasir POS iMersWAstore untuk UMKM. Siap pakai, mudah dikelola, terintegrasi WhatsApp.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom Config Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0ea5e9', // Blue 500
+                        secondary: '#10b981', // Emerald 500
+                        dark: '#0f172a', // Slate 900
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #0ea5e9, #10b981);
+        }
+        .hero-pattern {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-700 bg-slate-50 antialiased">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-md z-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center text-white shadow-lg">
+                        <i data-lucide="store" class="w-6 h-6"></i>
+                    </div>
+                    <span class="font-heading font-bold text-xl text-dark tracking-tight">iMers<span class="text-primary">Instal</span></span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#fitur" class="text-slate-600 hover:text-primary font-medium transition-colors">Fitur Unggulan</a>
+                    <a href="#paket" class="text-slate-600 hover:text-primary font-medium transition-colors">Pilihan Paket</a>
+                    <a href="#faq" class="text-slate-600 hover:text-primary font-medium transition-colors">Tanya Jawab</a>
+                </div>
+                <div>
+                    <a href="#paket" class="bg-dark hover:bg-slate-800 text-white px-6 py-2.5 rounded-full font-medium transition-all shadow-md hover:shadow-lg">Mulai Sekarang</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden hero-pattern">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-gradient-to-b from-primary/10 to-transparent pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-4xl mx-auto">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 text-primary font-medium text-sm mb-6 animate-fade-in-up">
+                    <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                    Solusi Go Digital untuk UMKM Indonesia
+                </div>
+                <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-extrabold text-dark tracking-tight mb-6 leading-tight">
+                    Punya Toko Online & Sistem Kasir Sendiri <br class="hidden md:block">
+                    <span class="gradient-text">Kini Gak Pake Ribet!</span>
+                </h1>
+                <p class="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+                    Tinggalkan cara lama. Kami bantu setup <strong class="text-dark">iMersWAstore</strong> sampai 100% SIAP PAKAI. Pesanan langsung masuk ke WhatsApp Anda, kelola stok & laporan penjualan jadi super gampang.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#paket" class="bg-gradient-to-r from-primary to-secondary hover:from-blue-600 hover:to-emerald-600 text-white px-8 py-4 rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-2">
+                        <i data-lucide="rocket" class="w-5 h-5"></i> Lihat Paket Harga
+                    </a>
+                    <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20mau%20tanya-tanya%20dulu%20soal%20jasa%20instalasi%20iMersWAstore" target="_blank" class="bg-white text-slate-700 hover:text-dark px-8 py-4 rounded-full font-bold text-lg border-2 border-slate-200 hover:border-slate-300 transition-all flex items-center justify-center gap-2">
+                        <i data-lucide="message-circle" class="w-5 h-5 text-secondary"></i> Konsultasi Gratis
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Trust Indicators -->
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 text-center border-t border-slate-200 pt-10">
+                <div>
+                    <div class="text-3xl font-heading font-bold text-dark mb-1">100%</div>
+                    <div class="text-sm text-slate-500 font-medium uppercase tracking-wide">Siap Pakai</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-heading font-bold text-dark mb-1">1x</div>
+                    <div class="text-sm text-slate-500 font-medium uppercase tracking-wide">Bayar (Tanpa Langganan)</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-heading font-bold text-dark mb-1">1x24 Jam</div>
+                    <div class="text-sm text-slate-500 font-medium uppercase tracking-wide">Estimasi Pengerjaan</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-heading font-bold text-dark mb-1"><i data-lucide="headset" class="w-8 h-8 mx-auto text-primary"></i></div>
+                    <div class="text-sm text-slate-500 font-medium uppercase tracking-wide">Support Bantuan</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fitur Section -->
+    <section id="fitur" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="font-heading text-3xl md:text-4xl font-bold text-dark mb-4">Kenapa Anda Butuh iMersWAstore?</h2>
+                <p class="text-lg text-slate-600">Sistem all-in-one yang dirancang khusus untuk mempermudah operasional bisnis UMKM, Reseller, dan Toko Lokal.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Fitur 1 -->
+                <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-lg transition-shadow">
+                    <div class="w-14 h-14 bg-blue-100 text-primary rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="shopping-bag" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-dark mb-3">Etalase Toko Profesional</h3>
+                    <p class="text-slate-600 leading-relaxed">Tampilkan produk Anda dengan elegan. Pelanggan bisa masukkan keranjang dan checkout langsung terhubung ke WhatsApp Anda.</p>
+                </div>
+                <!-- Fitur 2 -->
+                <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-lg transition-shadow">
+                    <div class="w-14 h-14 bg-emerald-100 text-secondary rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="calculator" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-dark mb-3">Sistem Kasir (POS)</h3>
+                    <p class="text-slate-600 leading-relaxed">Punya toko fisik? Gunakan fitur POS untuk catat pesanan offline. Mendukung hitung kembalian dan cetak struk thermal.</p>
+                </div>
+                <!-- Fitur 3 -->
+                <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-lg transition-shadow">
+                    <div class="w-14 h-14 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="database" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-dark mb-3">Database Google Sheets</h3>
+                    <p class="text-slate-600 leading-relaxed">Kelola produk, kategori, harga, dan laporan penjualan dengan mudah menggunakan Google Sheets. Tidak perlu keahlian coding!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="paket" class="py-20 bg-slate-900 relative">
+        <!-- Background Decoration -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute -top-40 -right-40 w-96 h-96 bg-primary rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+            <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-secondary rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="font-heading text-3xl md:text-4xl font-bold text-white mb-4">Pilih Paket Instalasi Anda</h2>
+                <p class="text-lg text-slate-300">Harga transparan, sekali bayar. Kami kerjakan dari nol sampai toko Anda siap menerima pesanan.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                
+                <!-- Paket LITE -->
+                <div class="bg-white rounded-3xl p-1 relative flex flex-col hover:transform hover:-translate-y-2 transition-transform duration-300">
+                    <div class="bg-slate-50 rounded-[22px] p-8 h-full flex flex-col border border-slate-100">
+                        <div class="mb-6">
+                            <h3 class="font-heading text-2xl font-bold text-dark mb-2">Paket Lite</h3>
+                            <p class="text-slate-500 text-sm h-10">Tanpa Domain & Hosting. Cocok jika Anda hanya ingin mencoba di local/Blogger/Netlify gratis.</p>
+                        </div>
+                        
+                        <!-- Image Preview -->
+                        <div class="mb-6 rounded-xl overflow-hidden shadow-sm border border-slate-200">
+                            <img src="imerswstore-lite.webp" alt="Paket Lite iMersWAstore" class="w-full h-40 object-cover object-top hover:scale-105 transition-transform duration-500">
+                        </div>
+
+                        <div class="mb-6">
+                            <div class="text-4xl font-heading font-extrabold text-dark mb-1">Rp 99.000</div>
+                            <div class="text-sm text-slate-500 font-medium">Sekali Bayar</div>
+                        </div>
+                        <ul class="space-y-4 mb-8 flex-1">
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-secondary shrink-0 mt-0.5"></i>
+                                <span class="text-slate-600 text-sm">Setup Master Database (G.Sheets)</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-secondary shrink-0 mt-0.5"></i>
+                                <span class="text-slate-600 text-sm">Deploy API Backend</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-secondary shrink-0 mt-0.5"></i>
+                                <span class="text-slate-600 text-sm">Koneksi Frontend ke Backend</span>
+                            </li>
+                            <li class="flex items-start gap-3 opacity-50">
+                                <i data-lucide="x-circle" class="w-5 h-5 text-slate-400 shrink-0 mt-0.5"></i>
+                                <span class="text-slate-500 text-sm line-through">Subdomain & Hosting</span>
+                            </li>
+                            <li class="flex items-start gap-3 opacity-50">
+                                <i data-lucide="x-circle" class="w-5 h-5 text-slate-400 shrink-0 mt-0.5"></i>
+                                <span class="text-slate-500 text-sm line-through">Setup di cPanel Sendiri</span>
+                            </li>
+                        </ul>
+                        <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20mau%20pesan%20Jasa%20Instalasi%20iMersWAstore%20*Paket%20LITE*%20(Rp%2099.000)" target="_blank" class="block w-full py-3.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-center rounded-xl transition-colors border border-slate-200">
+                            Pesan Paket Lite
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket SMART (RECOMMENDED) -->
+                <div class="bg-gradient-to-b from-primary to-secondary rounded-3xl p-1 relative flex flex-col hover:transform hover:-translate-y-2 transition-transform duration-300 shadow-2xl shadow-primary/20">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-400 to-orange-500 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider shadow-md whitespace-nowrap">
+                        Paling Laris
+                    </div>
+                    <div class="bg-white rounded-[22px] p-8 h-full flex flex-col">
+                        <div class="mb-6">
+                            <h3 class="font-heading text-2xl font-bold text-dark mb-2">Paket Smart</h3>
+                            <p class="text-slate-500 text-sm h-10">Praktis! Menggunakan Subdomain & Hosting dari kami. Anda terima beres.</p>
+                        </div>
+
+                        <!-- Image Preview -->
+                        <div class="mb-6 rounded-xl overflow-hidden shadow-md border border-slate-100 relative group">
+                            <img src="imerswastore-smart.webp" alt="Paket Smart iMersWAstore" class="w-full h-40 object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-dark/10 group-hover:bg-transparent transition-colors"></div>
+                        </div>
+
+                        <div class="mb-6">
+                            <div class="text-4xl font-heading font-extrabold text-dark mb-1">Rp 129.000</div>
+                            <div class="text-sm text-slate-500 font-medium">Sekali Bayar</div>
+                        </div>
+                        <ul class="space-y-4 mb-8 flex-1">
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-secondary shrink-0 mt-0.5"></i>
+                                <span class="text-slate-600 text-sm font-medium">Semua Fitur Paket Lite</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-primary shrink-0 mt-0.5"></i>
+                                <span class="text-dark text-sm font-semibold">Gratis Subdomain (partner.web.id)</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-primary shrink-0 mt-0.5"></i>
+                                <span class="text-dark text-sm font-semibold">Gratis Hosting Web</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-secondary shrink-0 mt-0.5"></i>
+                                <span class="text-slate-600 text-sm">Terima Beres (Siap Jualan)</span>
+                            </li>
+                            <li class="flex items-start gap-3 opacity-50">
+                                <i data-lucide="x-circle" class="w-5 h-5 text-slate-400 shrink-0 mt-0.5"></i>
+                                <span class="text-slate-500 text-sm line-through">Setup di Domain Sendiri</span>
+                            </li>
+                        </ul>
+                        <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20mau%20pesan%20Jasa%20Instalasi%20iMersWAstore%20*Paket%20SMART*%20(Rp%20129.000)" target="_blank" class="block w-full py-3.5 px-4 bg-dark hover:bg-slate-800 text-white font-bold text-center rounded-xl transition-colors shadow-md">
+                            Pesan Paket Smart
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket PREMIUM -->
+                <div class="bg-white rounded-3xl p-1 relative flex flex-col hover:transform hover:-translate-y-2 transition-transform duration-300">
+                    <div class="bg-slate-50 rounded-[22px] p-8 h-full flex flex-col border border-slate-100">
+                        <div class="mb-6">
+                            <h3 class="font-heading text-2xl font-bold text-dark mb-2">Paket Premium</h3>
+                            <p class="text-slate-500 text-sm h-10">Bawa Domain & Hosting (cPanel) Anda sendiri. Kami bantu setup semuanya.</p>
+                        </div>
+
+                        <!-- Image Preview -->
+                        <div class="mb-6 rounded-xl overflow-hidden shadow-sm border border-slate-200">
+                            <img src="imerswastore-premium.webp" alt="Paket Premium iMersWAstore" class="w-full h-40 object-cover object-top hover:scale-105 transition-transform duration-500">
+                        </div>
+
+                        <div class="mb-6">
+                            <div class="text-4xl font-heading font-extrabold text-dark mb-1">Rp 149.000</div>
+                            <div class="text-sm text-slate-500 font-medium">Sekali Bayar</div>
+                        </div>
+                        <ul class="space-y-4 mb-8 flex-1">
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-secondary shrink-0 mt-0.5"></i>
+                                <span class="text-slate-600 text-sm font-medium">Semua Fitur Paket Lite</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-purple-500 shrink-0 mt-0.5"></i>
+                                <span class="text-dark text-sm font-semibold">Menggunakan Domain Anda (.com/.id/dll)</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-purple-500 shrink-0 mt-0.5"></i>
+                                <span class="text-dark text-sm font-semibold">Setup di Hosting/cPanel Anda</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-secondary shrink-0 mt-0.5"></i>
+                                <span class="text-slate-600 text-sm">Akses File Sepenuhnya Milik Anda</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="info" class="w-5 h-5 text-slate-400 shrink-0 mt-0.5"></i>
+                                <span class="text-slate-500 text-xs italic">*Domain & Hosting dibeli terpisah oleh klien.</span>
+                            </li>
+                        </ul>
+                        <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20mau%20pesan%20Jasa%20Instalasi%20iMersWAstore%20*Paket%20PREMIUM*%20(Rp%20149.000)" target="_blank" class="block w-full py-3.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-center rounded-xl transition-colors border border-slate-200">
+                            Pesan Paket Premium
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-white">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-heading text-3xl font-bold text-dark mb-4">Pertanyaan yang Sering Diajukan</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+                    <button class="faq-btn w-full px-6 py-4 text-left font-bold text-dark flex justify-between items-center hover:bg-slate-50 focus:outline-none">
+                        <span>Apakah ada biaya bulanan atau tahunan?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-4 text-slate-600 text-sm leading-relaxed">
+                        Tidak ada biaya langganan untuk jasa instalasi kami (Sekali Bayar). Namun, jika Anda menggunakan Paket Premium, Anda tetap harus membayar perpanjangan Domain dan Hosting tahunan ke pihak penyedia hosting Anda.
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+                    <button class="faq-btn w-full px-6 py-4 text-left font-bold text-dark flex justify-between items-center hover:bg-slate-50 focus:outline-none">
+                        <span>Apa saja yang perlu saya siapkan?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-4 text-slate-600 text-sm leading-relaxed">
+                        Anda hanya perlu menyiapkan akun Google (Gmail) untuk menyimpan database Google Sheets. Jika memilih Paket Premium, Anda perlu memberikan akses cPanel kepada tim kami untuk proses upload file.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+                    <button class="faq-btn w-full px-6 py-4 text-left font-bold text-dark flex justify-between items-center hover:bg-slate-50 focus:outline-none">
+                        <span>Berapa lama proses pengerjaannya?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-4 text-slate-600 text-sm leading-relaxed">
+                        Proses instalasi normal memakan waktu 1x24 jam kerja setelah pembayaran dikonfirmasi dan data (Link Google Sheet & Akses Hosting) kami terima lengkap.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <section class="bg-gradient-to-br from-dark to-slate-800 py-16">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="font-heading text-3xl font-bold text-white mb-6">Siap Go Digital Hari Ini?</h2>
+            <p class="text-slate-300 mb-8">Jangan biarkan kompetitor mencuri pelanggan Anda. Miliki toko online profesional sekarang juga.</p>
+            <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20tertarik%20dengan%20Jasa%20Instalasi%20iMersWAstore" target="_blank" class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1da851] text-white px-8 py-4 rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+                <i data-lucide="message-circle" class="w-6 h-6"></i> Hubungi via WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark border-t border-slate-800 py-8 text-center text-slate-400 text-sm">
+        <p>&copy; 2026 iMersWAstore Installation Service. All rights reserved.</p>
+    </footer>
+
+    <!-- FAQ Script -->
+    <script>
+        lucide.createIcons();
+        
+        // FAQ Accordion Logic
+        const faqBtns = document.querySelectorAll('.faq-btn');
+        faqBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                const icon = btn.querySelector('i');
+                
+                // Toggle current FAQ
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+                
+                // Close other FAQs (Optional - if you want accordion style)
+                faqBtns.forEach(otherBtn => {
+                    if (otherBtn !== btn) {
+                        otherBtn.nextElementSibling.classList.add('hidden');
+                        otherBtn.querySelector('i').classList.remove('rotate-180');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
