@@ -490,6 +490,7 @@
         let globalArticles = [];
         let activeCategory = ''; 
         let cart = [];
+        let footerBrandingText = ''; // TANGKAP DATA FOOTER DINAMIS
         
         let activeProductDetails = null;
         let selectedVariantId = null;
@@ -525,6 +526,7 @@
                     globalShipping = res.shipping_rates || [];
                     globalArticles = res.articles || [];
                     appSettings = res.app_settings || {}; // Tangkap data App Settings
+                    footerBrandingText = res.footer_branding || ''; // TANGKAP FOOTER DINAMIS DARI BACKEND
                     buildStoreUI();
                 } else {
                     showLoaderError("Gagal memuat data katalog. Pastikan setting Google Sheet benar.");
@@ -677,6 +679,11 @@
             if (appSettings.show_blog_section === 'on' && globalArticles.length > 0) {
                 document.getElementById('blogSection').classList.remove('hidden');
                 renderBlogGrid(globalArticles);
+            }
+
+            // --- RENDER FOOTER DINAMIS ---
+            if (footerBrandingText) {
+                document.getElementById('poweredByText').innerHTML = footerBrandingText;
             }
 
             refreshIcons();

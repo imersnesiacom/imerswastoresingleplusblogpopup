@@ -613,6 +613,12 @@
                             </div>
                         </div>
 
+                        <div class="pt-4">
+                            <label class="block text-xs sm:text-sm font-medium text-slate-700 mb-1">Teks Footer Kustom (Copyright / Powered by)</label>
+                            <input type="text" id="setFooterBranding" class="w-full px-3 sm:px-4 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:border-emerald-500 text-sm" placeholder="Powered by Nama Toko Anda">
+                            <p class="text-[10px] text-slate-500 mt-1">Kosongkan jika ingin menggunakan bawaan sistem. Mendukung tag HTML ringan seperti &lt;b&gt;.</p>
+                        </div>
+
                         <h4 class="font-bold text-slate-700 mt-6 border-b pb-1 text-sm sm:text-base">Integrasi Pembayaran</h4>
                         <div>
                             <label class="block text-xs sm:text-sm font-medium text-slate-700 mb-1">URL Gambar QRIS Statis (Opsional)</label>
@@ -1355,7 +1361,7 @@
             if (res.success && res.data) {
                 appSettings = res.data;
                 
-                // POPULASI DATA THE HOLY TRINITY
+                // POPULASI DATA THE HOLY TRINITY & FOOTER
                 if(document.getElementById('setBannerMidImage')) document.getElementById('setBannerMidImage').value = appSettings.banner_mid_image || '';
                 if(document.getElementById('setShowBannerMid')) document.getElementById('setShowBannerMid').value = appSettings.show_banner_mid || 'off';
                 if(document.getElementById('setShowPopup')) document.getElementById('setShowPopup').value = appSettings.show_popup || 'off';
@@ -1365,6 +1371,7 @@
                 if(document.getElementById('setPopupBtnLink')) document.getElementById('setPopupBtnLink').value = appSettings.popup_btn_link || '';
                 if(document.getElementById('setAboutUsText')) document.getElementById('setAboutUsText').value = appSettings.about_us_text || '';
                 if(document.getElementById('setShowBlogSection')) document.getElementById('setShowBlogSection').value = appSettings.show_blog_section || 'on';
+                if(document.getElementById('setFooterBranding')) document.getElementById('setFooterBranding').value = appSettings.footer_branding || '';
                 
                 if (currentUser && currentUser.role !== 'admin') {
                     try { renderTutorialPlaylist(JSON.parse(appSettings.admin_tutorial || '[]')); } 
@@ -2079,7 +2086,8 @@
                 popup_btn_text: document.getElementById('setPopupBtnText') ? document.getElementById('setPopupBtnText').value : '',
                 popup_btn_link: document.getElementById('setPopupBtnLink') ? document.getElementById('setPopupBtnLink').value : '',
                 about_us_text: document.getElementById('setAboutUsText') ? document.getElementById('setAboutUsText').value : '',
-                show_blog_section: document.getElementById('setShowBlogSection') ? document.getElementById('setShowBlogSection').value : 'on'
+                show_blog_section: document.getElementById('setShowBlogSection') ? document.getElementById('setShowBlogSection').value : 'on',
+                footer_branding: document.getElementById('setFooterBranding') ? document.getElementById('setFooterBranding').value : ''
             };
             await apiCall('update_app_settings', appPayload);
 
